@@ -1,12 +1,5 @@
-def options(opcoes):
-    c=1
-    print("BANCO POTIGUAR".center(40, "-"))
-    for p in opcoes:
-        print(f"{c} - {p}")
-        c+=1
-    print("-"*40)
-    return input("Sua opcao >>> ")
-from conta import Conta
+from models.conta import Conta
+from interface.menu import options, excepts
 def bankView(banco):
     while True:
         menu = options(["Criar Conta", "Depositar", "Sacar", "Transferir", "Ver sua conta", "Sair do sistema"])
@@ -32,14 +25,7 @@ def bankView(banco):
                 valor = float(input("Valor a depositar: "))
                 banco.deposity_bank(nome, valor)
                 print("Deposito feito com sucesso. ")
-            elif verify_pass == "CONTA_DESBLOQUEADA":
-                print("Conta desbloqueada! Tente novamente.".center(40, "-"))
-            elif verify_pass == "USUARIO_NAOEXISTE":
-                    print("O usuario nao existe. Crie seu usuario para continuar. ")
-            elif verify_pass == "SENHA_INCORRETA":
-                print("Senha digitada e incorreta. A acao nao pode prosseguir. ")
-            elif verify_pass == "USUARIO_BLOQUEADO":
-                print("A conta foi bloqueada. Tente novamente mais tarde. ")
+            excepts(verify_pass)
             
         elif menu == "3":
             nome = input("Seu titular: ")
@@ -52,15 +38,7 @@ def bankView(banco):
                     print("Saldo insuficiente pra continuar")
                 else:
                     print("Saque feito com sucesso. ")
-            elif verify_pass == "CONTA_DESBLOQUEADA":
-                print("Conta desbloqueada! Tente novamente.".center(40, "-"))
-            elif verify_pass == "USUARIO_NAOEXISTE":
-                    print("O usuario nao existe. Crie seu usuario para continuar. ")
-            elif verify_pass == "SENHA_INCORRETA":
-                print("Senha digitada e incorreta. A acao nao pode prosseguir. ")
-            elif verify_pass == "USUARIO_BLOQUEADO":
-                print("A conta foi bloqueada. Tente novamente mais tarde. ")
-
+            excepts(verify_pass)
         elif menu == "4":
             remetente = input("Digite seu nome: ")
             destino = input("Digite a quem vc quer transferir o saldo: ")
@@ -69,20 +47,13 @@ def bankView(banco):
             if verify_pass == "OK":
                 valor = float(input("Digite o valor: "))
                 transfer = banco.permission_transfer(remetente, destino, valor)
-                if transfer == "SALDO_INSUFICIENTE ":
+                if transfer == "SALDO_INSUFICIENTE":
                     print("Voce nao tem saldo suficiente para ESSA transferencia. ")
                 elif transfer == "USUARIO_NAOEXISTE":
                     print("O seu destino nao tem conta registrada. ")
                 else:
                     print('Transferencia feita com sucesso.')
-            elif verify_pass == "CONTA_DESBLOQUEADA":
-                print("Conta desbloqueada! Tente novamente.".center(40, "-"))
-            elif verify_pass == "USUARIO_NAOEXISTE":
-                    print("O usuario nao existe. Crie seu usuario para continuar. ")
-            elif verify_pass == "SENHA_INCORRETA":
-                print("Senha digitada e incorreta. A acao nao pode prosseguir. ")
-            elif verify_pass == "USUARIO_BLOQUEADO":
-                print("A conta foi bloqueada. Tente novamente mais tarde. ")
+            excepts(verify_pass)
         elif menu == "5":
             nome = input("Digite seu titular: ")
             c = banco.find_account(nome)

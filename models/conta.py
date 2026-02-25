@@ -1,4 +1,4 @@
-from excecoes import BlockedAccount, IncorrectPassword, Unlocked
+from models.excecoes import BlockedAccount, IncorrectPassword, Unlocked
 from datetime import datetime
 import time
 class Conta:
@@ -41,7 +41,8 @@ class Conta:
                 raise IncorrectPassword
         else:
             self.desbloquear()
-            raise Unlocked
+            raise Unlocked # nao faz sentido um fluxo normal levnatar ua excecao q deveria ser erro
+        
 
     def bloquear(self):
         self.conta_bloqueada = True

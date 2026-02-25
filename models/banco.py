@@ -1,5 +1,5 @@
-from conta import Conta as c
-from excecoes import IncorrectPassword, BlockedAccount, Unlocked
+from models.conta import Conta as c
+from models.excecoes import IncorrectPassword, BlockedAccount, Unlocked
 
 class Banco:
     def __init__(self):
