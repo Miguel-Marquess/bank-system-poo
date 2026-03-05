@@ -27,13 +27,19 @@ Projeto simples de sistema bancário feito em Python usando Programação Orient
 ## Estrutura do Projeto
 
 ```
+conta_bancaria_poo/
 │
-├── banco.py       # Gerencia as contas e regras do banco
-├── conta.py       # Classe Conta com regras internas
-├── excecoes.py    # Exceções personalizadas
-├── interface.py   # Menu e interação com usuário
-├── main.py        # Ponto de entrada do sistema
-└── README.md
+├── app.py                # Arquivo principal que inicia o sistema
+├── README.md             # Documentação do projeto
+│
+├── interface/            # Camada de interação com o usuário
+│   ├── interface.py      # Funções de interface
+│   └── menu.py           # Menu do sistema
+│
+└── models/               # Regras de negócio do sistema bancário
+    ├── banco.py          # Gerencia contas e operações do banco
+    ├── conta.py          # Classe Conta
+    └── excecoes.py       # Exceções personalizadas
 ```
 
 ---
